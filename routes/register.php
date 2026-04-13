@@ -9,7 +9,7 @@ $email = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = trim($_POST['name'] ?? '');
     $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $confirm = $_POST['confirm_password'] ?? '';
 
     if ($name === '' || $email === '' || $password === '' || $confirm === '') {
