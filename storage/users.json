@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "name": "Admin Olvart",
+        "email": "admin@olvart.test",
+        "password": "$2y$10$G1pyB23C2wWnnpQtuDacPOIG6oApenVuEp8seS0zbeH3w6RXAKF9C",
+        "role": "admin",
+        "created_at": "2026-04-13 00:30:49"
+    }
+]

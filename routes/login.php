@@ -1,87 +1,55 @@
+<?php
+require_once __DIR__ . '/auth.php';
+redirectIfAuthenticated();
+$error = '';
+$email = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    if ($email === '' || $password === '') {
+        $error = 'Email dan password harus diisi.';
+    } else {
+        $result = loginUser($email, $password);
+        if ($result['success']) {
+            header('Location: dashboard.php');
+            exit;
+        }
+        $error = $result['message'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
 <title>Login Olvart</title>
-
-<style>
-
-body{
-    font-family: Arial;
-    background:#e8e4d3;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.card{
-    width:350px;
-    background:white;
-    border-radius:20px;
-    overflow:hidden;
-}
-
-.header{
-    background:#7a0000;
-    color:white;
-    text-align:center;
-    padding:30px;
-}
-
-.form{
-    padding:25px;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    margin-bottom:15px;
-    border-radius:10px;
-    border:1px solid #ccc;
-}
-
-button{
-    width:100%;
-    background:#7a0000;
-    color:white;
-    border:none;
-    padding:15px;
-    border-radius:12px;
-}
-
-.info{
-    background:#f4ecd6;
-    padding:15px;
-    border-radius:12px;
-}
-
-</style>
+<link rel="stylesheet" href="../assets/resources/css/olvart.css">
 </head>
-
-<body>
-
+<body class="auth-page">
+<div class="container">
 <div class="card">
-
 <div class="header">
-<h2>Olvart</h2>
-<p>Seni dalam Genggaman</p>
+<div class="header-row">
+<div class="logo">Olvart</div>
+<svg class="header-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="var(--wine)"/>
+</svg>
 </div>
-
+<h2 class="auth-title">masuk</h2>
+<p class="subtitle-small">Autentikasi multi-user untuk akses dashboard</p>
+</div>
 <div class="form">
-
-<form method="POST" action="{{ route('login') }}">
-
-<input type="email" name="email" placeholder="Email">
-<input type="password" name="password" placeholder="Password">
-
-<button>Masuk Sekarang</button>
-
+<?php if ($error): ?>
+<div class="message"><?= htmlspecialchars($error) ?></div>
+<?php endif; ?>
+<form method="POST" action="login.php">
+<input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($email) ?>" required>
+<input type="password" name="password" placeholder="Password" required>
+<button type="submit">Masuk Sekarang</button>
 </form>
-
-<div class="info">
-Informasi Login Demo
+<p style="text-align:center;margin-top:18px;">Belum punya akun? <a href="register.php">Daftar di sini</a></p>
 </div>
-
 </div>
 </div>
 
