@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+<?php
 require_once __DIR__ . '/auth.php';
 $user = currentUser();
 ?>
@@ -38,7 +42,9 @@ $user = currentUser();
             <div class="header-actions">
                 <a href="login.php" class="btn-login">Login</a>
                 <a href="register.php" class="btn-register">Register</a>
+                <a href="/public/catalog.php">Katalog</a>
             </div>
         <?php endif; ?>
     </div>
 </header>
+

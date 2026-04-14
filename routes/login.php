@@ -1,57 +1,71 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+<?php
 require_once __DIR__ . '/auth.php';
-redirectIfAuthenticated();
-$error = '';
-$email = '';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-
-    if ($email === '' || $password === '') {
-        $error = 'Email dan password harus diisi.';
-    } else {
-        $result = loginUser($email, $password);
-        if ($result['success']) {
-            header('Location: dashboard.php');
-            exit;
-        }
-        $error = $result['message'];
-    }
+if (currentUser()) {
+    header('Location: dashboard.php');
+    exit;
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-<title>Login Olvart</title>
-<link rel="stylesheet" href="../assets/resources/css/olvart.css">
-</head>
-<body class="auth-page">
-<div class="container">
-<div class="card">
-<div class="header">
-<div class="header-row">
-<div class="logo">Olvart</div>
-<svg class="header-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="var(--wine)"/>
-</svg>
-</div>
-<h2 class="auth-title">masuk</h2>
-<p class="subtitle-small">Autentikasi multi-user untuk akses dashboard</p>
-</div>
-<div class="form">
-<?php if ($error): ?>
-<div class="message"><?= htmlspecialchars($error) ?></div>
-<?php endif; ?>
-<form method="POST" action="login.php">
-<input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($email) ?>" required>
-<input type="password" name="password" placeholder="Password" required>
-<button type="submit">Masuk Sekarang</button>
-</form>
-<p style="text-align:center;margin-top:18px;">Belum punya akun? <a href="register.php">Daftar di sini</a></p>
-</div>
-</div>
-</div>
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Olvart</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Olvart -->
+    <link rel="stylesheet" href="../assets/resources/css/olvart.css">
+</head>
+
+<body class="auth-page">
+    <div class="auth-wrapper">
+        
+        <!-- Bagian Kiri -->
+        <div class="auth-left">
+            <h1>Selamat Datang Kembali</h1>
+            <p>Masuk untuk melanjutkan penyewaan alat lukis favorit Anda di Olvart.</p>
+            <img src="../assets/img/paint.png" alt="Ilustrasi Alat Lukis">
+        </div>
+
+        <!-- Bagian Kanan -->
+        <div class="auth-right">
+            <div class="auth-card">
+                <h2>Masuk</h2>
+                <p class="subtitle">Silakan login ke akun Anda</p>
+
+                <form method="POST" action="login_process.php">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Masukkan email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Masuk
+                    </button>
+
+                    <p class="text-center mt-3">
+                        Belum punya akun?
+                        <a href="register.php">Daftar di sini</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>

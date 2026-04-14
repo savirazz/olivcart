@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+<?php
 require_once __DIR__ . '/auth.php';
 if (currentUser()) {
     header('Location: dashboard.php');
@@ -11,7 +15,17 @@ if (currentUser()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Olvart - Selamat Datang</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Olvart -->
     <link rel="stylesheet" href="../assets/resources/css/olvart.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="landing-page">
 <header class="landing-header">
@@ -21,29 +35,41 @@ if (currentUser()) {
     <a class="btn btn-primary" href="login.php">Masuk</a>
   </nav>
 </header>
-<section class="hero">
-  <div class="hero-copy">
-    <span class="eyebrow">Sewa Alat Lukis</span>
-    <h1>Wujudkan Karya Tanpa Batas</h1>
-    <p>Temukan alat lukis lengkap untuk setiap ide kreatif Anda. Olvart membantu Anda menyewa peralatan berkualitas dengan mudah dan aman.</p>
-    <div class="buttons">
-      <a class="btn btn-primary" href="login.php">Masuk</a>
-      <a class="btn btn-secondary" href="register.php">Mulai Daftar</a>
-    </div>
-  </div>
+<section class="hero"> 
+  <div class="hero-copy"> 
+    <span class="eyebrow">Sewa Alat Lukis</span> 
+    <h1>Wujudkan Karya Tanpa Batas</h1> 
+    <p>Temukan alat lukis lengkap untuk setiap ide kreatif Anda. Olvart membantu Anda menyewa peralatan berkualitas dengan mudah dan aman.</p> 
+    <div class="buttons"> 
+      <a class="btn btn-primary" href="login.php">Masuk</a> 
+      <a class="btn btn-secondary" href="register.php">Mulai Daftar</a> 
+    </div> 
+  </div> 
 </section>
 <section class="features">
-  <div class="feature-card">
-    <h3>Akses Cepat</h3>
-    <p>Login dan kelola peminjaman dengan dashboard personal yang mudah digunakan.</p>
-  </div>
-  <div class="feature-card">
-    <h3>Peralatan Premium</h3>
-    <p>Pilih kuas, kanvas, dan media lukis terbaik untuk setiap proyek Anda.</p>
-  </div>
-  <div class="feature-card">
-    <h3>Komunitas Kreatif</h3>
-    <p>Jadilah bagian dari pengguna yang saling mendukung karya seni satu sama lain.</p>
+  <h2 class="section-title text-center">Keunggulan Olvart</h2>
+  <p class="section-subtitle text-center">
+    Solusi terbaik untuk kebutuhan sewa alat lukis Anda.
+  </p>
+
+  <div class="features-container">
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-palette"></i></div>
+      <h3>Akses Cepat</h3>
+      <p>Login dan kelola peminjaman dengan dashboard personal yang mudah digunakan.</p>
+    </div>
+
+    <div class="feature-card">
+      <div <div class="feature-icon"><i class="fas fa-paint-brush"></i></div>
+      <h3>Peralatan Premium</h3>
+      <p>Pilih kuas, kanvas, dan media lukis terbaik untuk setiap proyek Anda.</p>
+    </div>
+
+    <div class="feature-card">
+      <div class="feature-icon"><i class="fas fa-star"></i></div>
+      <h3>Komunitas Kreatif</h3>
+      <p>Jadilah bagian dari pengguna yang saling mendukung karya seni satu sama lain.</p>
+    </div>
   </div>
 </section>
 <footer>
@@ -53,436 +79,249 @@ if (currentUser()) {
 </html>
 
 <style>
-/* Olvart global style */
-:root {
-  --cream: #f5e8e2;
-  --cream-soft: #fbf1ed;
-  --wine: #DC143C;
-  --wine-dark: #B22222;
-  --wine-soft: #FF6B6B;
-  --surface: #fff4f1;
-  --surface-alt: #f6e6e3;
-  --text: #3d1f27;
-  --muted: #80606c;
-  --border: #e4d3d0;
-  --success: #2d6a49;
-  --danger: #b22f33;
-  --warning: #c47a5a;
+/* Landing Page */
+.landing-page {
+  font-family: 'Poppins', sans-serif;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(180deg, #f9efe9 0%, #f3e2dd 100%);
-  color: var(--text);
-}
-
-a {
-  color: var(--wine);
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.navbar {
-  background: var(--wine);
-  color: #fff;
+/* Header */
+.landing-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 40px;
-  box-shadow: 0 14px 50px rgba(122, 15, 25, 0.18);
+  padding: 20px 50px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-.logo {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 20px;
+.landing-header .logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--wine);
 }
 
-.nav-links {
+/* Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 20px;
+  background: linear-gradient(135deg, #fff6f3, #fbeaea);
+}
+
+.hero-copy {
+  max-width: 700px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--wine-dark);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: var(--muted);
+  margin: 20px 0;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: #ffe5e5;
+  color: var(--wine);
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Features */
+.features {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  justify-content: center;
+  gap: 25px;
+  padding: 60px 20px;
+  background: #fff;
 }
 
-.nav-links a,
-.right-nav span {
-  color: #fff;
+.feature-card {
+  background: #fff4f1;
+  border-radius: 20px;
+  padding: 25px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card h3 {
+  color: var(--wine);
+  margin-bottom: 10px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--wine);
+  color: white;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .landing-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .features {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Sticky Header */
+.landing-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Logo */
+.landing-header .logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--wine);
+}
+
+/* Navigasi */
+.landing-nav {
+  display: flex;
+  gap: 12px;
+}
+
+/* Efek Hover Tombol */
+.landing-nav .btn {
+  border-radius: 10px;
+  padding: 10px 18px;
   font-weight: 600;
 }
 
-.container {
-  width: min(1200px, calc(100% - 40px));
-  margin: 30px auto;
-}
-
-.header .logo {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 24px;
-  color: var(--wine);
-}
-
-.header-row {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 14px;
-}
-
-.header-icon {
-  width: 40px;
-  height: 40px;
-  display: block;
-}
-
-.auth-title {
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-transform: lowercase;
-  margin: 0;
-  color: var(--text);
-  text-align: center;
-}
-
-.header {
-  text-align: center;
-}
-
-.subtitle-small {
-  color: var(--muted);
-  font-size: 0.85rem;
-  margin-bottom: 24px;
-  opacity: 0.7;
-  text-align: center;
-}
-
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  box-shadow: 0 20px 45px rgba(122, 15, 25, 0.08);
-  padding: 28px;
-  margin-bottom: 26px;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.message,
-.error,
-.notes,
-.notes-row,
-.modal,
-.info-section,
-.summary,
-.receipt-section,
-.security-badge {
-  border-radius: 18px;
-}
-
-.message {
-  background: #e9f5e7;
-  color: #205331;
-  border: 1px solid #cce2cc;
-  padding: 16px 20px;
-}
-
-.error {
-  background: #fce8e7;
-  color: #8a1f24;
-  border: 1px solid #f0c4c3;
-  padding: 16px 20px;
-}
-
-.notes,
-.notes-row {
-  background: #fff2ef;
-  border-left: 4px solid var(--wine-soft);
-  padding: 16px 18px;
-  color: var(--muted);
-  margin-top: 18px;
-}
-
-.filter-group-title,
-.section-title,
-.receipt-title,
-.method-title,
-.info-label,
-.summary-row span:first-child,
-.payment-badge {
-  color: var(--wine);
-}
-
-.filters,
-.methods,
-.btn-group,
-.nav-links,
-.form-grid,
-.stats-grid,
-.tools-grid,
-.action-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-.filter-btn,
-.btn,
-.method-card,
-.tool-action,
-.btn-add,
-.btn-detail,
-.btn-return,
-.btn-verify,
-.btn-secondary,
-.btn-primary,
-.btn-danger,
-.btn-reset,
-.btn-secure,
-.btn-view,
-.btn-cancel,
-.btn-reject-modal {
-  border-radius: 14px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.filter-btn,
-.btn,
-.btn-add,
-.btn-detail,
-.btn-return,
-.btn-verify,
-.btn-secondary,
-.btn-primary,
-.btn-danger,
-.btn-reset,
-.btn-secure,
-.btn-view,
-.btn-cancel,
-.btn-reject-modal {
-  padding: 12px 20px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.filter-btn {
-  background: rgba(255,255,255,0.85);
-  color: var(--wine);
-  border: 1px solid rgba(122, 15, 25, 0.1);
-}
-
-.filter-btn.active,
-.btn-primary {
-  background: var(--wine);
-  color: #fff;
-}
-
-.btn-secondary,
-.btn-reset,
-.btn-view,
-.btn-cancel,
-.btn-detail {
-  background: var(--cream-soft);
-  color: var(--wine);
-  border-color: var(--border);
-}
-
-.btn-danger,
-.btn-reject,
-.btn-reject-modal {
-  background: #c93d3f;
-  color: #fff;
-}
-
-.btn-return,
-.btn-approve { background: #8b1f33; color: #fff; }
-
-.btn:hover,
-.filter-btn:hover,
-.method-card:hover {
-  transform: translateY(-1px);
-}
-
-.table-wrap {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 720px;
-}
-
-th,
-td {
-  padding: 16px 18px;
-  border-bottom: 1px solid #eee;
-}
-
-th {
-  background: rgba(122, 15, 25, 0.05);
-  color: var(--wine);
-  font-weight: 700;
-  text-align: left;
-}
-
-tbody tr:hover {
-  background: rgba(250, 232, 229, 0.8);
-}
-
-.status-badge,
-.payment-badge,
-.security-badge,
-.method-card,
-.tool-stock,
-.tool-price,
-.tool-name {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-radius: 999px;
-}
-
-.status-badge {
-  padding: 8px 14px;
-  background: #f8e4e5;
-  color: #7a1520;
-  font-size: 0.9rem;
-  font-weight: 700;
-}
-
-.status-pending { background: #f7e6db; color: #8a4c39; }
-.status-unpaid  { background: #fde6e8; color: #a92f34; }
-.status-paid    { background: #e6f2ea; color: #276141; }
-
-.method-card {
-  flex: 1 1 220px;
-  min-height: 160px;
-  padding: 20px;
-  border: 1px solid rgba(122,15,25,0.12);
-  background: #fff7f4;
-}
-
-.method-card.selected {
-  border-color: var(--wine);
-  background: #f5e9e7;
-}
-
-.method-icon {
-  font-size: 32px;
-}
-
-.method-title,
-.section-title,
-.feature,
-.receipt-title {
-  font-size: 1.05rem;
-}
-
-.modal {
-  background: rgba(0,0,0,0.4);
+.landing-header {
   position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-.modal-content {
-  width: min(600px, 100%);
-  background: #fff;
-  padding: 28px;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+/* Tambahkan jarak agar konten tidak tertutup header */
+body {
+  padding-top: 90px;
 }
 
-.modal-title {
-  margin-top: 0;
+/* ===== FEATURES SECTION ===== */
+.features {
+  padding: 80px 20px;
+  background: linear-gradient(180deg, #ffffff, #fdf1ec);
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
   color: var(--wine);
+  margin-bottom: 10px;
 }
 
-.modal-textarea {
-  width: 100%;
-  min-height: 120px;
-  padding: 14px;
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  resize: vertical;
-  font-family: inherit;
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 40px;
 }
 
-.form-grid,
-.grid,
-.stats-grid,
-.tools-grid {
-  gap: 20px;
-}
-
-input[type='text'],
-input[type='email'],
-input[type='password'],
-input[type='date'],
-textarea,
-select {
-  width: 100%;
-  padding: 14px 16px;
-  border: 1px solid #ddd;
-  border-radius: 14px;
-  background: #fff;
-  color: var(--text);
-  font-family: inherit;
-}
-
-input[type='radio'] {
-  accent-color: var(--wine);
-}
-
-.btn-group {
+.features-container {
+  display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  justify-content: center;
+  gap: 25px;
 }
 
-.summary,
-.info-section,
-.receipt-section,
-.security-badge {
-  background: #fff2ef;
-  border: 1px solid rgba(122, 15, 25, 0.1);
+.feature-card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 30px 25px;
+  width: 300px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #f1d9d4;
 }
 
-.summary-row,
-.info-row,
-.receipt-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 14px;
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
 }
 
-.summary-total,
-.receipt-total {
-  font-size: 1.2rem;
-  color: var(--wine);
-  font-weight: 800;
+.feature-icon {
+  font-size: 45px;
+  margin-bottom: 15px;
 }
 
-.payment-code {
-  font-family: 'Courier New', Courier, monospace;
-  background: #f6e2dd;
-  color: var(--wine);
-  padding: 8px 12px;
-  border-radius: 12px;
+.feature-card h3 {
+  color: var(--wine-dark);
+  font-size: 1.3rem;
+  margin-bottom: 10px;
 }
-</style>
+
+.feature-card p {
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 992px) {
+  .feature-card {
+    width: 45%;
+  }
+}
+
+@media (max-width: 576px) {
+  .feature-card {
+    width: 100%;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}

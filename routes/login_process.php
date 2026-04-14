@@ -1,30 +1,30 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 session_start();
-require 'db.php';
+require_once __DIR__ . '/../config/database.php';
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+$email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
 
-$stmt = $conn->prepare("SELECT * FROM users WHERE email=?");
-$stmt->execute([$email]);
+if (empty($email) || empty($password)) {
+    header("Location: login.php?error=Email dan password wajib diisi");
+    exit;
+}
+
+// Ambil data pengguna
+$stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+$stmt->execute(['email' => $email]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
+// Verifikasi password
 if ($user && password_verify($password, $user['password'])) {
-
     $_SESSION['user'] = $user;
-
-    switch ($user['role']) {
-        case 'admin':
-            header("Location: dashboard.php");
-            break;
-        case 'petugas':
-            header("Location: dashboard.php");
-            break;
-        default:
-            header("Location: katalog.php");
-    }
-
+    header("Location: dashboard.php");
+    exit;
 } else {
-    echo "<script>alert('Login gagal');window.location='login.php';</script>";
+    header("Location: login.php?error=Email atau password salah");
+    exit;
 }
 ?>

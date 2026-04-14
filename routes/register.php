@@ -1,4 +1,8 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+?>
+<?php
 require_once __DIR__ . '/auth.php';
 redirectIfAuthenticated();
 $error = '';
@@ -35,42 +39,66 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 <head>
-<title>Daftar Olvart</title>
-<link rel="stylesheet" href="../assets/resources/css/olvart.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar - Olvart</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Utama -->
+    <link rel="stylesheet" href="../assets/resources/css/olvart.css">
 </head>
 <body class="auth-page">
-<div class="container">
-<div class="card">
-<div class="header">
-<div class="header-row">
-<div class="logo">Olvart</div>
-<svg class="header-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L13.09 8.26L20 9L13.09 9.74L12 16L10.91 9.74L4 9L10.91 8.26L12 2Z" fill="var(--wine)"/>
-</svg>
-</div>
-<h2 class="auth-title">daftar</h2>
-<p>Buat akses multi-user pada Olvart</p>
-</div>
-<div class="form">
-<?php if ($error): ?>
-<div class="message"><?= htmlspecialchars($error) ?></div>
-<?php endif; ?>
-<?php if ($message): ?>
-<div class="message" style="background:#d8f5dd;color:#106c35;border-color:#a3dfb4;">
-<?= $message ?>
-</div>
-<?php endif; ?>
-<form method="POST" action="register.php">
-<input type="text" name="name" placeholder="Nama Lengkap" value="<?= htmlspecialchars($name) ?>" required>
-<input type="email" name="email" placeholder="Email" value="<?= htmlspecialchars($email) ?>" required>
-<input type="password" name="password" placeholder="Password" required>
-<input type="password" name="confirm_password" placeholder="Konfirmasi Password" required>
-<button type="submit">Daftar Sekarang</button>
-</form>
-<p style="text-align:center;margin-top:18px;">Sudah punya akun? <a href="login.php">Masuk di sini</a></p>
-</div>
-</div>
-</div>
+    <div class="auth-wrapper">
+        <!-- Bagian Kiri -->
+        <div class="auth-left">
+            <h1>Selamat Datang di Olvart</h1>
+            <p>Sewa alat lukis berkualitas untuk mewujudkan kreativitas tanpa batas.</p>
+            <img src="../assets/img/paint.png" alt="Ilustrasi Alat Lukis">
+        </div>
 
+        <!-- Bagian Kanan (Form) -->
+        <div class="auth-right">
+            <div class="auth-card">
+                <h2>Daftar</h2>
+                <p class="subtitle">Buat akses multi-user pada Olvart</p>
+
+                <form method="POST" action="register_process.php">
+                    <div class="mb-3">
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="nama" class="form-control" placeholder="Masukkan nama lengkap" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Email</label>
+                        <input type="email" name="email" class="form-control" placeholder="Masukkan email" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label>Konfirmasi Password</label>
+                        <input type="password" name="confirm_password" class="form-control" placeholder="Konfirmasi password" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">
+                        Daftar Sekarang
+                    </button>
+
+                    <p class="text-center mt-3">
+                        Sudah punya akun?
+                        <a href="login.php">Masuk di sini</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
